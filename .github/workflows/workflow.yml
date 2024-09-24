@@ -7,7 +7,7 @@ on: [push]
 
 jobs:
       
-  # Deploy VM in Azure
+  # Deploy VM in azure
   DeployVM:
     runs-on: windows-latest
 
