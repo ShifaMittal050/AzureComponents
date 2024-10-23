@@ -20,15 +20,19 @@ jobs:
       run: |
           echo "${{ steps.myGetSecretAction.outputs.mySecret1 }} ${{ steps.myGetSecretAction.outputs.mySecret2 }}"
 
-          
-    # - uses: Azure/docker-login@v1
-    #   with:
-    #     login-server: mycontainer.azurecr.io
-    #     username: ${{ steps.myGetSecretAction.outputs.mySecret1 }}
-    #     password: ${{ steps.myGetSecretAction.outputs.mySecret2 }}
-    # - run: |
-    #     cd go-sample
-    #     docker build . -t my.azurecr.io/myimage:${{ github.sha }}
-    #     docker push my.azurecr.io/myimage:${{ github.sha }}
-    #     cd ..
- 
+    - uses: Azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS_KVSATest001 }} # Define secret variable in repository settings as per action documentation
+    - uses: Azure/get-keyvault-secrets@v1
+      with:
+        keyvault: "KV-SATest001"
+        secrets: |
+            DatabasePassword=mySecret1
+            ClientSecret=mySecret2           
+        configs: |
+            User=platform-api-user
+            ApiUrl=platform-api-url
+    - name: Some step to consume secrets
+      run: |
+         echo "${{ env.User }} ${{ env.ApiUrl }}"        
+  
