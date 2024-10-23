@@ -19,3 +19,8 @@ jobs:
     - name: Some step to consume secrets
       run: |
           echo "${{ steps.myGetSecretAction.outputs.mySecret1 }} ${{ steps.myGetSecretAction.outputs.mySecret2 }}"
+
+    - name: Create resource groups with secret values
+      run: |
+        az group Create --name ${{ steps.myGetSecretAction.outputs.mySecret2 }} --location uksouth
+        # az group Create --name ${{ steps.azure-keyvault-secrets.outputs.example2 }} --location uksouth
