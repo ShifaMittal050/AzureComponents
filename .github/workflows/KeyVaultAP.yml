@@ -19,19 +19,3 @@ jobs:
     - name: Some step to consume secrets
       run: |
           echo "${{ steps.myGetSecretAction.outputs.mySecret1 }} ${{ steps.myGetSecretAction.outputs.mySecret2 }}"
-
-    - name: Secondway to fetch secrets
-    - uses: dmitriybobrovskiy/get-azure-keyvault-secrets@v1.2.0
-      with:
-          login_credentials: ${{ secrets.AZURE_CREDENTIALS_KVSATest001 }}
-          keyvault: KV-SATest001
-          secrets: |
-            DatabasePassword=mySecret1
-            ClientSecret=mySecret2
-          configs: |
-            User=mySecret1
-            ApiUrl=mySecret2
-        
-    - name: Some step to consume secrets
-      run: |
-          echo "${{ env.User }} ${{ env.ApiUrl }}"
