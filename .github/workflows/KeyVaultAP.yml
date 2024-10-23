@@ -19,9 +19,9 @@ jobs:
     - name: Some step to consume secrets
       run: |
           echo "${{ steps.myGetSecretAction.outputs.mySecret1 }} ${{ steps.myGetSecretAction.outputs.mySecret2 }}"
-    - name: Get the secret
+    - name: Got the secret
       run: |   
-        if [ ${{ steps.myGetSecretAction.outputs.mySecret1 }} == "mySecret2Test1" ]
+        if [ "${{ steps.myGetSecretAction.outputs.mySecret1 }}" == "mySecret2Test1" ]
         then
           echo "Got our secret"
 
