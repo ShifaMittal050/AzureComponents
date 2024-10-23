@@ -21,9 +21,7 @@ jobs:
           echo "${{ steps.myGetSecretAction.outputs.mySecret1 }} ${{ steps.myGetSecretAction.outputs.mySecret2 }}"
     - name: Got the secret
       run: |   
-        if [ "${{ steps.myGetSecretAction.outputs.mySecret1 }}" == "mySecret2Test1" ]
-        then
-          echo "Got our secret"
+          echo "${{ steps.myGetSecretAction.outputs.mySecret1 }}" | sed 's/ //g'
 
     # - name: Create resource groups with secret values
     #   run: |
