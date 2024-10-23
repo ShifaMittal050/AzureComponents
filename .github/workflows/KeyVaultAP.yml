@@ -30,8 +30,8 @@ jobs:
             DatabasePassword=mySecret1
             ClientSecret=mySecret2           
         configs: |
-            User=platform-api-user
-            ApiUrl=platform-api-url
+            User=mySecret1
+            ApiUrl=mySecret2
     - name: Some step to consume secrets
       run: |
          echo "${{ env.User }} ${{ env.ApiUrl }}"        
