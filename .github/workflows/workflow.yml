@@ -3,7 +3,8 @@ name: GitHub for IT Pro CI/CD Pipeline
 env:
   OUTPUT_PATH: ${{ github.workspace }}
 
-on: [push]
+on:
+  workflow_dispatch:
 
 jobs:
       
