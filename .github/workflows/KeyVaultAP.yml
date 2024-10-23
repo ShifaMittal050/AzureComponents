@@ -20,19 +20,18 @@ jobs:
       run: |
           echo "${{ steps.myGetSecretAction.outputs.mySecret1 }} ${{ steps.myGetSecretAction.outputs.mySecret2 }}"
 
-    - uses: Azure/login@v1
+    - name: Secondway to fetch secrets
+    - uses: dmitriybobrovskiy/get-azure-keyvault-secrets@v1.2.0
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS_KVSATest001 }} # Define secret variable in repository settings as per action documentation
-    - uses: Azure/get-keyvault-secrets@v1
-      with:
-        keyvault: "KV-SATest001"
-        secrets: |
+          login_credentials: ${{ secrets.AZURE_CREDENTIALS_KVSATest001 }}
+          keyvault: KV-SATest001
+          secrets: |
             DatabasePassword=mySecret1
-            ClientSecret=mySecret2           
-        configs: |
+            ClientSecret=mySecret2
+          configs: |
             User=mySecret1
             ApiUrl=mySecret2
+        
     - name: Some step to consume secrets
       run: |
-         echo "${{ env.User }} ${{ env.ApiUrl }}"        
-  
+          echo "${{ env.User }} ${{ env.ApiUrl }}"
